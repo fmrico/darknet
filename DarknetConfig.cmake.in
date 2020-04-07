@@ -42,4 +42,11 @@ get_target_property(FULL_DARKNET_INCLUDE_DIRS Darknet::dark INTERFACE_INCLUDE_DI
 list(GET FULL_DARKNET_INCLUDE_DIRS 0 Darknet_INCLUDE_DIR)
 get_filename_component(Darknet_INCLUDE_DIR "${Darknet_INCLUDE_DIR}" REALPATH)
 
-find_package_handle_standard_args(Darknet REQUIRED_VARS Darknet_INCLUDE_DIR VERSION_VAR PACKAGE_VERSION)
+list(GET FULL_DARKNET_LIBRARY 0 Darknet_LIBRARY)
+get_filename_component(Darknet_LIBRARY "${Darknet_INCLUDE_DIR}/../../lib/libdark.so" REALPATH)
+
+message(STATUS "=====>" ${Darknet_INCLUDE_DIR}/../../lib/libdark.so)
+
+message(STATUS "----->" ${Darknet_LIBRARY})
+
+find_package_handle_standard_args(Darknet REQUIRED_VARS Darknet_INCLUDE_DIR Darknet_LIBRARY VERSION_VAR PACKAGE_VERSION)

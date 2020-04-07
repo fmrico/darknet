@@ -43,10 +43,10 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}" CACHE PATH "Install prefix" FORCE)
 endif()
 
-set(INSTALL_BIN_DIR      "${CMAKE_CURRENT_LIST_DIR}" CACHE PATH "Path where exe and dll will be installed")
-set(INSTALL_LIB_DIR      "${CMAKE_CURRENT_LIST_DIR}" CACHE PATH "Path where lib will be installed")
+set(INSTALL_BIN_DIR      "lib" CACHE PATH "Path where exe and dll will be installed")
+set(INSTALL_LIB_DIR      "lib" CACHE PATH "Path where lib will be installed")
 set(INSTALL_INCLUDE_DIR  "include/darknet"           CACHE PATH "Path where headers will be installed")
-set(INSTALL_CMAKE_DIR    "share/darknet"             CACHE PATH "Path where cmake configs will be installed")
+set(INSTALL_CMAKE_DIR    "share/${PROJECT_NAME}"             CACHE PATH "Path where cmake configs will be installed")
 
 if(${CMAKE_VERSION} VERSION_LESS "3.9.0")
   message(WARNING "To build with CUDA support you need CMake 3.9.0+")
@@ -428,8 +428,8 @@ install(TARGETS dark EXPORT DarknetTargets
   PUBLIC_HEADER DESTINATION "${INSTALL_INCLUDE_DIR}"
   COMPONENT dev
 )
-install(TARGETS uselib darknet
-  DESTINATION "${INSTALL_BIN_DIR}"
+install(TARGETS uselib darknet dark
+  DESTINATION "lib"
 )
 if(OpenCV_FOUND AND OpenCV_VERSION VERSION_GREATER "3.0" AND BUILD_USELIB_TRACK)
   install(TARGETS uselib_track
